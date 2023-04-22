@@ -1,1 +1,1 @@
--- MovieLens Recommendation System (Neighborhood-based Collaborative Filtering)--
+-- MovieLens Recommendation System (Matrix Factorization)--
