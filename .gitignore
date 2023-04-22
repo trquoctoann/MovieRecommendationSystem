@@ -1,0 +1,4 @@
+__pycache__/
+*.env
+raw_data/20230422
+.ipynb_checkpoints/

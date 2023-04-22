@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  cap2-pyspark:
+    image : cap2_pyspark
+    build:
+      context: ./spark
+      dockerfile: Dockerfile
+    container_name: cap2-pyspark
+    hostname: cap2-pyspark
+    volumes:
+      - ../src/spark:/home/jovyan/work
+      - ../raw_data:/home/jovyan/raw_data
+    networks:
+      - cap2_network
+    ports:
+      - 8080:8080
+      - 7077:7077
+      - 8888:8888
+    restart: always
+
+  cap2-database:
+    image: mysql
+    container_name: cap2-database
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: '123'
+    hostname: cap2-database
+    networks:
+      - cap2_network
+    volumes:
+      - cap2_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    restart: always
+
+volumes:
+  cap2_data:
+
+networks:
+  cap2_network:
+    driver: bridge
